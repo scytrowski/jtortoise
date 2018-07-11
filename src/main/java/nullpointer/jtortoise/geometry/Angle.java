@@ -17,6 +17,44 @@ public class Angle {
         return Angle.radians(radiansValue);
     }
 
+    public static Angle between(Point firstPoint, Point secondPoint) {
+        Vector vectorBetween = Vector.between(firstPoint, secondPoint);
+        return vectorBetween.getAngle();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Angle) {
+            Angle otherAngle = (Angle)obj;
+            return value == otherAngle.value;
+        } else
+            return false;
+    }
+
+    public Angle plus(Angle otherAngle) {
+        return new Angle(value + otherAngle.value);
+    }
+
+    public Angle minus(Angle otherAngle) {
+        return new Angle(value - otherAngle.value);
+    }
+
+    public Angle times(double number) {
+        return new Angle(value * number);
+    }
+
+    public Angle by(double number) {
+        return new Angle(value / number);
+    }
+
+    public double sin() {
+        return Math.sin(value);
+    }
+
+    public double cos() {
+        return Math.cos(value);
+    }
+
     public double getValue() {
         return value;
     }
