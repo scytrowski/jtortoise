@@ -83,26 +83,26 @@ public class Turtle {
     }
 
     private void notifyMovedTo() {
-        observer.onMoveTo(position);
+        observer.onMoveTo(this, position);
     }
 
     private void notifyRotatedTo() {
-        observer.onRotateTo(angle);
+        observer.onRotateTo(this, angle);
     }
 
     private void notifyPenStateChanged() {
-        observer.onChangePenState(penState);
+        observer.onChangePenState(this, penState);
     }
 
     private void notifyPenColorChanged() {
-        observer.onChangePenColor(penColor);
+        observer.onChangePenColor(this, penColor);
     }
 
     private void notifyFillColorChanged() {
-        observer.onChangeFillColor(fillColor);
+        observer.onChangeFillColor(this, fillColor);
     }
 
     private void notifySpeedChanged() {
-        observer.onChangeSpeed(speed);
+        observer.onChangeSpeed(this, speed);
     }
 }

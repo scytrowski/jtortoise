@@ -26,7 +26,7 @@ public class TurtleTest {
         Point destination = Point.cartesian(6.781, -76.1356);
         Angle expectedAngle = Angle.between(turtle.getPosition(), destination);
         turtle.moveTo(destination);
-        verify(observer, times(1)).onRotateTo(expectedAngle);
+        verify(observer, times(1)).onRotateTo(turtle, expectedAngle);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class TurtleTest {
     public void shouldNotifyMovedToOnceWithCorrectPointOnMoveTo() {
         Point destination = Point.cartesian(6.781, -76.1356);
         turtle.moveTo(destination);
-        verify(observer, times(1)).onMoveTo(destination);
+        verify(observer, times(1)).onMoveTo(turtle, destination);
     }
 
     @Test
@@ -48,8 +48,8 @@ public class TurtleTest {
         Point destination = Point.cartesian(6.781, -76.1356);
         turtle.moveTo(destination);
         InOrder orderVerifier = inOrder(observer);
-        orderVerifier.verify(observer).onRotateTo(any());
-        orderVerifier.verify(observer).onMoveTo(any());
+        orderVerifier.verify(observer).onRotateTo(any(), any());
+        orderVerifier.verify(observer).onMoveTo(any(), any());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class TurtleTest {
     public void shouldNotifyRotatedToOnceWithCorrectAngleOnRotateTo() {
         Angle destinationAngle = Angle.radians(1.56789);
         turtle.rotateTo(destinationAngle);
-        verify(observer, times(1)).onRotateTo(destinationAngle);
+        verify(observer, times(1)).onRotateTo(turtle, destinationAngle);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class TurtleTest {
     @Test
     public void shouldNotifyPenStateChangedOnceWithCorrectPenStateOnPenUp() {
         turtle.penUp();
-        verify(observer, times(1)).onChangePenState(PenState.UP);
+        verify(observer, times(1)).onChangePenState(turtle, PenState.UP);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class TurtleTest {
     @Test
     public void shouldNotifyPenStateChangedOnceWithCorrectPenStateOnPenDown() {
         turtle.penDown();
-        verify(observer, times(1)).onChangePenState(PenState.DOWN);
+        verify(observer, times(1)).onChangePenState(turtle, PenState.DOWN);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class TurtleTest {
     public void shouldNotifyPenColorChangedOnceWithCorrectColorOnSetPenColor() {
         Color newPenColor = Color.rgb(15, 62, 116);
         turtle.setPenColor(newPenColor);
-        verify(observer, times(1)).onChangePenColor(newPenColor);
+        verify(observer, times(1)).onChangePenColor(turtle, newPenColor);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class TurtleTest {
     public void shouldNotifyFillColorChangedOnceWithCorrectColorOnSetFillColor() {
         Color newFillColor = Color.rgb(117, 251, 3);
         turtle.setFillColor(newFillColor);
-        verify(observer, times(1)).onChangeFillColor(newFillColor);
+        verify(observer, times(1)).onChangeFillColor(turtle, newFillColor);
     }
 
     @Test
@@ -129,6 +129,6 @@ public class TurtleTest {
     public void shouldNotifySpeedChangedOnceWithCorrectValueOnSetSpeed() {
         double newSpeed = 0.779;
         turtle.setSpeed(newSpeed);
-        verify(observer, times(1)).onChangeSpeed(newSpeed);
+        verify(observer, times(1)).onChangeSpeed(turtle, newSpeed);
     }
 }
