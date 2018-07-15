@@ -1,2 +1,9 @@
 rootProject.name = 'jtortoise'
+include 'jtortoise-geometry'
+include 'jtortoise-graphics'
+include 'jtortoise-core'
+include 'jtortoise-commands'
+include 'jtortoise-core-buffers'
+include 'jtortoise-turtles'
+include 'jtortoise-facade'
 
