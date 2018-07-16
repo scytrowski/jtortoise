@@ -1,6 +1,5 @@
 package nullpointer.jtortoise.core.buffers;
 
-import nullpointer.jtortoise.core.AggregatedCommandProcessor;
 import nullpointer.jtortoise.core.CommandProcessor;
 
 import java.util.Collection;
