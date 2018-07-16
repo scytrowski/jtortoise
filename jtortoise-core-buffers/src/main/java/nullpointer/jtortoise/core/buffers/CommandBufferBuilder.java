@@ -1,6 +1,5 @@
 package nullpointer.jtortoise.core.buffers;
 
-import nullpointer.jtortoise.core.AggregatedCommandProcessor;
 import nullpointer.jtortoise.core.CommandBuffer;
 import nullpointer.jtortoise.core.CommandProcessor;
 
@@ -10,8 +9,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CommandBufferBuilder {
-    private final Set<CommandProcessor> commandProcessors = new HashSet<>();
-    private CommandProcessingThreadFactory processingThreadFactory;
+    private final Set<CommandProcessor> commandProcessors;
+    private final CommandBufferPreparer sequentialBufferPreparer;
+    private final CommandBufferPreparer parallelBufferPreparer;
+    private final CommandProcessorAggregator commandProcessorAggregator;
+
+    CommandBufferBuilder(Set<CommandProcessor> commandProcessors, CommandBufferPreparer sequentialBufferPreparer, CommandBufferPreparer parallelBufferPreparer, CommandProcessorAggregator commandProcessorAggregator) {
+        this.commandProcessors = commandProcessors;
+        this.sequentialBufferPreparer = sequentialBufferPreparer;
+        this.parallelBufferPreparer = parallelBufferPreparer;
+        this.commandProcessorAggregator = commandProcessorAggregator;
+    }
+
+    public CommandBufferBuilder() {
+        this(new HashSet<>(), new SequentialCommandBufferPreparer(), new ParallelCommandBufferPreparer(), new CommandProcessorAggregator());
+    }
 
     public CommandBufferBuilder withCommandProcessor(CommandProcessor commandProcessor) {
         commandProcessors.add(commandProcessor);
@@ -19,23 +31,20 @@ public class CommandBufferBuilder {
     }
 
     public CommandBuffer buildSequential() {
-        createCommonDependencies();
-        return new SequentialCommandBuffer(processingThreadFactory);
+        CommandProcessor commandProcessor = prepareCommandProcessor();
+        return sequentialBufferPreparer.prepare(commandProcessor);
     }
 
     public CommandBuffer buildParallel() {
-        createCommonDependencies();
-        SequentialCommandBufferFactory bufferFactory = new SequentialCommandBufferFactory(processingThreadFactory);
-        SequentialCommandBufferProvider bufferProvider = new SequentialCommandBufferProvider(bufferFactory);
-        return new ParallelCommandBuffer(bufferProvider);
+        CommandProcessor commandProcessor = prepareCommandProcessor();
+        return parallelBufferPreparer.prepare(commandProcessor);
     }
 
     public Collection<CommandProcessor> getCommandProcessors() {
         return Collections.unmodifiableCollection(commandProcessors);
     }
 
-    private void createCommonDependencies() {
-        CommandProcessor aggregatedCommandProcessor = new AggregatedCommandProcessor(commandProcessors);
-        processingThreadFactory = new CommandProcessingThreadFactory(aggregatedCommandProcessor);
+    private CommandProcessor prepareCommandProcessor() {
+        return commandProcessorAggregator.aggregate(commandProcessors);
     }
 }
