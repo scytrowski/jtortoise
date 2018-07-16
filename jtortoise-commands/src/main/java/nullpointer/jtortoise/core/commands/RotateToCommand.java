@@ -1,7 +1,8 @@
-package nullpointer.jtortoise.commands;
+package nullpointer.jtortoise.core.commands;
 
+import nullpointer.jtortoise.core.Command;
 import nullpointer.jtortoise.geometry.Angle;
-import nullpointer.jtortoise.turtles.Turtle;
+import nullpointer.jtortoise.core.Turtle;
 
 public class RotateToCommand extends Command {
     private final Angle destinationAngle;

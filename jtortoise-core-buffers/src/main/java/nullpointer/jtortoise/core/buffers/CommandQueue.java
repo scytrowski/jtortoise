@@ -1,6 +1,6 @@
 package nullpointer.jtortoise.core.buffers;
 
-import nullpointer.jtortoise.commands.Command;
+import nullpointer.jtortoise.core.Command;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

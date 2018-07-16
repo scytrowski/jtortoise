@@ -1,7 +1,8 @@
-package nullpointer.jtortoise.commands;
+package nullpointer.jtortoise.core.commands;
 
+import nullpointer.jtortoise.core.Command;
 import nullpointer.jtortoise.graphics.PenState;
-import nullpointer.jtortoise.turtles.Turtle;
+import nullpointer.jtortoise.core.Turtle;
 
 public class ChangePenStateCommand extends Command {
     private final PenState newPenState;

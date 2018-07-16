@@ -12,7 +12,6 @@ repositories {
 }
 
 dependencies {
-    compile project(":jtortoise-turtles")
     compile project(":jtortoise-commands")
     compile project(":jtortoise-core")
     testCompile group: 'junit', name: 'junit', version: '4.12'

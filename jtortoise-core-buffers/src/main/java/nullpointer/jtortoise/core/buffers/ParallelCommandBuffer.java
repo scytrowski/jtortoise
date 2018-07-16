@@ -1,9 +1,9 @@
 package nullpointer.jtortoise.core.buffers;
 
-import nullpointer.jtortoise.commands.Command;
+import nullpointer.jtortoise.core.Command;
 import nullpointer.jtortoise.core.CommandBuffer;
 import nullpointer.jtortoise.core.CommandBufferException;
-import nullpointer.jtortoise.turtles.Turtle;
+import nullpointer.jtortoise.core.Turtle;
 
 class ParallelCommandBuffer implements CommandBuffer {
     private final SequentialCommandBufferProvider bufferProvider;

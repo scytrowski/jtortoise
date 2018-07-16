@@ -1,19 +1,30 @@
 package nullpointer.jtortoise.core;
 
-import nullpointer.jtortoise.commands.Command;
-
 public class CommandExecutor {
     private final CommandBuffer buffer;
+    private final CommandExecutionExceptionHandler exceptionHandler;
+    private final CommandExecutionExceptionFactory exceptionFactory;
 
-    public CommandExecutor(CommandBuffer buffer) {
+    CommandExecutor(CommandBuffer buffer, CommandExecutionExceptionHandler exceptionHandler, CommandExecutionExceptionFactory exceptionFactory) {
         this.buffer = buffer;
+        this.exceptionHandler = exceptionHandler;
+        this.exceptionFactory = exceptionFactory;
     }
 
-    public void execute(Command command) throws CommandExecutionException {
+    public CommandExecutor(CommandBuffer buffer, CommandExecutionExceptionHandler exceptionHandler) {
+        this(buffer, exceptionHandler, new CommandExecutionExceptionFactory());
+    }
+
+    public void execute(Command command) {
         try {
             buffer.submit(command);
         } catch (CommandBufferException ex) {
-            throw new CommandExecutionException("Cannot execute command", ex);
+            emitExceptionToHandle(ex);
         }
+    }
+
+    private void emitExceptionToHandle(Exception exception) {
+        CommandExecutionException executionException = exceptionFactory.create("Cannot execute command", exception);
+        exceptionHandler.handle(executionException);
     }
 }

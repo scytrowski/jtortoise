@@ -1,7 +1,7 @@
 package nullpointer.jtortoise.core.buffers;
 
 import nullpointer.jtortoise.core.CommandBuffer;
-import nullpointer.jtortoise.turtles.Turtle;
+import nullpointer.jtortoise.core.Turtle;
 import org.junit.Before;
 import org.junit.Test;
 

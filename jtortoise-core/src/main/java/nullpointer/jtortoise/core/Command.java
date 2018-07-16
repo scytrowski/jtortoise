@@ -1,6 +1,4 @@
-package nullpointer.jtortoise.commands;
-
-import nullpointer.jtortoise.turtles.Turtle;
+package nullpointer.jtortoise.core;
 
 public abstract class Command {
     private final Turtle turtle;

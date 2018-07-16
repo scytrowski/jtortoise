@@ -1,7 +1,7 @@
 package nullpointer.jtortoise.core.buffers;
 
 import nullpointer.jtortoise.core.CommandBuffer;
-import nullpointer.jtortoise.turtles.Turtle;
+import nullpointer.jtortoise.core.Turtle;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
