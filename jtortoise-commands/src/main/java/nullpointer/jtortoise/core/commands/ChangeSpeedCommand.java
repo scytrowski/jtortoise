@@ -1,13 +1,13 @@
 package nullpointer.jtortoise.core.commands;
 
 import nullpointer.jtortoise.core.Command;
-import nullpointer.jtortoise.core.Turtle;
+import nullpointer.jtortoise.core.CommandSource;
 
 public class ChangeSpeedCommand extends Command {
     private final double newSpeed;
 
-    public ChangeSpeedCommand(Turtle turtle, double newSpeed) {
-        super(turtle);
+    public ChangeSpeedCommand(CommandSource source, double newSpeed) {
+        super(source);
         this.newSpeed = newSpeed;
     }
 

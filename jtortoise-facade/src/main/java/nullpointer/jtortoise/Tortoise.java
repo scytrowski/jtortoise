@@ -1,12 +1,16 @@
-package nullpointer.jtortoise.core;
+package nullpointer.jtortoise;
 
+import nullpointer.jtortoise.core.Command;
+import nullpointer.jtortoise.core.CommandExecutor;
+import nullpointer.jtortoise.core.CommandSource;
+import nullpointer.jtortoise.core.commands.CommandFactory;
 import nullpointer.jtortoise.geometry.Angle;
 import nullpointer.jtortoise.geometry.Point;
 import nullpointer.jtortoise.graphics.Color;
 import nullpointer.jtortoise.graphics.Colors;
 import nullpointer.jtortoise.graphics.PenState;
 
-public class Turtle {
+public class Tortoise implements CommandSource {
     private final CommandFactory commandFactory;
     private final CommandExecutor commandExecutor;
     private Point position = Point.ZERO;
@@ -16,9 +20,13 @@ public class Turtle {
     private Color fillColor = Colors.WHITE;
     private double speed = 0.5;
 
-    public Turtle(CommandFactory commandFactory, CommandExecutor commandExecutor) {
+    Tortoise(CommandFactory commandFactory, CommandExecutor commandExecutor) {
         this.commandFactory = commandFactory;
         this.commandExecutor = commandExecutor;
+    }
+
+    public Tortoise(CommandExecutor commandExecutor) {
+        this(new CommandFactory(), commandExecutor);
     }
 
     public void moveTo(Point destination) {

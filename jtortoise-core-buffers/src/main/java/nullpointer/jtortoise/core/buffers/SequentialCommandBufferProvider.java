@@ -1,17 +1,17 @@
 package nullpointer.jtortoise.core.buffers;
 
 import nullpointer.jtortoise.core.CommandBuffer;
-import nullpointer.jtortoise.core.Turtle;
+import nullpointer.jtortoise.core.CommandSource;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 class SequentialCommandBufferProvider {
-    private final ConcurrentMap<Turtle, CommandBuffer> turtleBuffers;
+    private final ConcurrentMap<CommandSource, CommandBuffer> sourceBuffers;
     private final SequentialCommandBufferFactory bufferFactory;
 
-    SequentialCommandBufferProvider(ConcurrentMap<Turtle, CommandBuffer> turtleBuffers, SequentialCommandBufferFactory bufferFactory) {
-        this.turtleBuffers = turtleBuffers;
+    SequentialCommandBufferProvider(ConcurrentMap<CommandSource, CommandBuffer> sourceBuffers, SequentialCommandBufferFactory bufferFactory) {
+        this.sourceBuffers = sourceBuffers;
         this.bufferFactory = bufferFactory;
     }
 
@@ -19,12 +19,12 @@ class SequentialCommandBufferProvider {
         this(new ConcurrentHashMap<>(), bufferFactory);
     }
 
-    public CommandBuffer provide(Turtle turtle) {
-        if (turtleBuffers.containsKey(turtle))
-            return turtleBuffers.get(turtle);
+    public CommandBuffer provide(CommandSource source) {
+        if (sourceBuffers.containsKey(source))
+            return sourceBuffers.get(source);
         else {
             CommandBuffer turtleBuffer = bufferFactory.create();
-            turtleBuffers.put(turtle, turtleBuffer);
+            sourceBuffers.put(source, turtleBuffer);
             return turtleBuffer;
         }
     }

@@ -1,14 +1,14 @@
 package nullpointer.jtortoise.core.commands;
 
 import nullpointer.jtortoise.core.Command;
+import nullpointer.jtortoise.core.CommandSource;
 import nullpointer.jtortoise.geometry.Point;
-import nullpointer.jtortoise.core.Turtle;
 
 public class MoveToCommand extends Command {
     private final Point destination;
 
-    public MoveToCommand(Turtle turtle, Point destination) {
-        super(turtle);
+    public MoveToCommand(CommandSource source, Point destination) {
+        super(source);
         this.destination = destination;
     }
 

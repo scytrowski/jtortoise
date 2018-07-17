@@ -1,14 +1,14 @@
 package nullpointer.jtortoise.core.commands;
 
 import nullpointer.jtortoise.core.Command;
+import nullpointer.jtortoise.core.CommandSource;
 import nullpointer.jtortoise.graphics.Color;
-import nullpointer.jtortoise.core.Turtle;
 
 public class ChangePenColorCommand extends Command {
     private final Color newPenColor;
 
-    public ChangePenColorCommand(Turtle turtle, Color newPenColor) {
-        super(turtle);
+    public ChangePenColorCommand(CommandSource source, Color newPenColor) {
+        super(source);
         this.newPenColor = newPenColor;
     }
 

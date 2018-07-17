@@ -1,13 +1,13 @@
 package nullpointer.jtortoise.core;
 
 public abstract class Command {
-    private final Turtle turtle;
+    private final CommandSource source;
 
-    public Command(Turtle turtle) {
-        this.turtle = turtle;
+    public Command(CommandSource source) {
+        this.source = source;
     }
 
-    public Turtle getTurtle() {
-        return turtle;
+    public CommandSource getSource() {
+        return source;
     }
 }

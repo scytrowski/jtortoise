@@ -1,5 +1,5 @@
 import nullpointer.jtortoise.core.Command;
-import nullpointer.jtortoise.core.Turtle;
+import nullpointer.jtortoise.core.CommandSource;
 import nullpointer.jtortoise.core.commands.*;
 import nullpointer.jtortoise.geometry.Angle;
 import nullpointer.jtortoise.geometry.Point;
@@ -10,9 +10,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class CommandFactoryImplTest {
-    private final CommandFactoryImpl factory = new CommandFactoryImpl();
-    private final Turtle turtle = mock(Turtle.class);
+public class CommandFactoryTest {
+    private final CommandFactory factory = new CommandFactory();
+    private final CommandSource source = mock(CommandSource.class);
     private final Point destination = mock(Point.class);
     private final Angle destinationAngle = mock(Angle.class);
     private final PenState newPenState = PenState.UP;
@@ -22,109 +22,109 @@ public class CommandFactoryImplTest {
 
     @Test
     public void shouldReturnInstanceOfMoveToCommandOnCreateMoveTo() {
-        Command result = factory.createMoveTo(turtle, destination);
+        Command result = factory.createMoveTo(source, destination);
         assertTrue(result instanceof MoveToCommand);
     }
 
     @Test
-    public void shouldReturnCommandWithCorrectTurtleOnCreateMoveTo() {
-        Command result = factory.createMoveTo(turtle, destination);
-        assertEquals(turtle, result.getTurtle());
+    public void shouldReturnCommandWithCorrectSourceOnCreateMoveTo() {
+        Command result = factory.createMoveTo(source, destination);
+        assertEquals(source, result.getSource());
     }
 
     @Test
     public void shouldReturnCommandWithCorrectDestinationOnCreateMoveTo() {
-        Command result = factory.createMoveTo(turtle, destination);
+        Command result = factory.createMoveTo(source, destination);
         assertEquals(destination, ((MoveToCommand)result).getDestination());
     }
 
     @Test
     public void shouldReturnInstanceOfRotateToCommandOnCreateRotateTo() {
-        Command result = factory.createRotateTo(turtle, destinationAngle);
+        Command result = factory.createRotateTo(source, destinationAngle);
         assertTrue(result instanceof RotateToCommand);
     }
 
     @Test
-    public void shouldReturnCommandWithCorrectTurtleOnCreateRotateTo() {
-        Command result = factory.createRotateTo(turtle, destinationAngle);
-        assertEquals(turtle, result.getTurtle());
+    public void shouldReturnCommandWithCorrectSourceOnCreateRotateTo() {
+        Command result = factory.createRotateTo(source, destinationAngle);
+        assertEquals(source, result.getSource());
     }
 
     @Test
     public void shouldReturnCommandWithCorrectDestinationAngleOnCreateRotateTo() {
-        Command result = factory.createRotateTo(turtle, destinationAngle);
+        Command result = factory.createRotateTo(source, destinationAngle);
         assertEquals(destinationAngle, ((RotateToCommand)result).getDestinationAngle());
     }
 
     @Test
     public void shouldReturnInstanceOfChangePenStateCommandOnCreateChangePenState() {
-        Command result = factory.createChangePenState(turtle, newPenState);
+        Command result = factory.createChangePenState(source, newPenState);
         assertTrue(result instanceof ChangePenStateCommand);
     }
 
     @Test
-    public void shouldReturnCommandWithCorrectTurtleOnCreateChangePenState() {
-        Command result = factory.createChangePenState(turtle, newPenState);
-        assertEquals(turtle, result.getTurtle());
+    public void shouldReturnCommandWithCorrectSourceOnCreateChangePenState() {
+        Command result = factory.createChangePenState(source, newPenState);
+        assertEquals(source, result.getSource());
     }
 
     @Test
     public void shouldReturnCommandWithCorrectNewPenStateOnCreateChangePenState() {
-        Command result = factory.createChangePenState(turtle, newPenState);
+        Command result = factory.createChangePenState(source, newPenState);
         assertEquals(newPenState, ((ChangePenStateCommand)result).getNewPenState());
     }
 
     @Test
     public void shouldReturnInstanceOfChangePenColorCommandOnCreateChangePenColor() {
-        Command result = factory.createChangePenColor(turtle, newPenColor);
+        Command result = factory.createChangePenColor(source, newPenColor);
         assertTrue(result instanceof ChangePenColorCommand);
     }
 
     @Test
-    public void shouldReturnCommandWithCorrectTurtleOnCreateChangePenColor() {
-        Command result = factory.createChangePenColor(turtle, newPenColor);
-        assertEquals(turtle, result.getTurtle());
+    public void shouldReturnCommandWithCorrectSourceOnCreateChangePenColor() {
+        Command result = factory.createChangePenColor(source, newPenColor);
+        assertEquals(source, result.getSource());
     }
 
     @Test
     public void shouldReturnCommandWithCorrectNewPenColorOnCreateChangePenColor() {
-        Command result = factory.createChangePenColor(turtle, newPenColor);
+        Command result = factory.createChangePenColor(source, newPenColor);
         assertEquals(newPenColor, ((ChangePenColorCommand)result).getNewPenColor());
     }
 
     @Test
     public void shouldReturnInstanceOfChangeFillColorCommandOnCreateChangeFillColor() {
-        Command result = factory.createChangeFillColor(turtle, newFillColor);
+        Command result = factory.createChangeFillColor(source, newFillColor);
         assertTrue(result instanceof ChangeFillColorCommand);
     }
 
     @Test
-    public void shouldReturnCommandWithCorrectTurtleOnCreateChangeFillColor() {
-        Command result = factory.createChangeFillColor(turtle, newFillColor);
-        assertEquals(turtle, result.getTurtle());
+    public void shouldReturnCommandWithCorrectSourceOnCreateChangeFillColor() {
+        Command result = factory.createChangeFillColor(source, newFillColor);
+        assertEquals(source, result.getSource());
     }
 
     @Test
     public void shouldReturnCommandWithCorrectNewFillColorOnCreateChangeFillColor() {
-        Command result = factory.createChangeFillColor(turtle, newFillColor);
+        Command result = factory.createChangeFillColor(source, newFillColor);
         assertEquals(newFillColor, ((ChangeFillColorCommand)result).getNewFillColor());
     }
 
     @Test
     public void shouldReturnInstanceOfChangeSpeedCommandOnCreateChangedSpeed() {
-        Command result = factory.createChangeSpeed(turtle, newSpeed);
+        Command result = factory.createChangeSpeed(source, newSpeed);
         assertTrue(result instanceof ChangeSpeedCommand);
     }
 
     @Test
-    public void shouldReturnCommandWithCorrectTurtleOnCreateChangeSpeed() {
-        Command result = factory.createChangeSpeed(turtle, newSpeed);
-        assertEquals(turtle, result.getTurtle());
+    public void shouldReturnCommandWithCorrectSourceOnCreateChangeSpeed() {
+        Command result = factory.createChangeSpeed(source, newSpeed);
+        assertEquals(source, result.getSource());
     }
 
     @Test
     public void shouldReturnCommandWithCorrectNewSpeedOnCreateChangedSpeed() {
-        Command result = factory.createChangeSpeed(turtle, newSpeed);
+        Command result = factory.createChangeSpeed(source, newSpeed);
         assertEquals(newSpeed, ((ChangeSpeedCommand)result).getNewSpeed(), 0);
     }
 }
